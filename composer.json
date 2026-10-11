@@ -1,0 +1,54 @@
+{
+  "name": "conductor/conductor",
+  "version": "1.0.0",
+  "description": "Conductor: the deploy and orchestration application, with every conductor module installed, run against an application's configuration directory.",
+  "type": "library",
+  "homepage": "https://github.com/conductorphp/conductor",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Kirk Madera",
+      "email": "kmadera@robofirm.com"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "php": "~8.4.1|~8.5.0",
+    "conductor/application-orchestration": "^5.0",
+    "conductor/aws-s3-filesystem-support": "^4.2",
+    "conductor/azure-blob-filesystem-support": "^5.2",
+    "conductor/clicktap-platform-support": "^1.1",
+    "conductor/core": "^7.0",
+    "conductor/drupal-platform-support": "^6.0",
+    "conductor/git-vcs-support": "^5.0",
+    "conductor/magento-1-platform-support": "^6.0",
+    "conductor/magento-2-platform-support": "^5.0",
+    "conductor/mysql-database-support": "^6.3",
+    "conductor/ssh-support": "^5.2",
+    "conductor/symfony-4-platform-support": "^6.0",
+    "conductor/wordpress-platform-support": "^6.0",
+    "laminas/laminas-config-aggregator": "^1.18",
+    "laminas/laminas-servicemanager": "^4.0",
+    "symfony/console": "^8.0"
+  },
+  "suggest": {
+    "ext-pdo_mysql": "For the MySQL database adapter (checked when the adapter is selected).",
+    "mydumper": "mydumper/myloader 1.0.5+ on PATH for the Mydumper import/export adapter.",
+    "git": "git on PATH for the git VCS adapter."
+  },
+  "bin": [
+    "bin/conductor"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Conductor\\": "src/"
+    }
+  },
+  "extra": {
+    "laminas": {
+      "config-provider": "Conductor\\ConfigProvider"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+    "main": "bin/conductor",
+    "output": "conductor.phar",
+    "directories": ["bin", "config", "src"],
+    "files": ["composer.json"],
+    "finder": [
+        {
+            "in": "vendor",
+            "exclude": ["test", "tests", "Tests", "Test", "docs", "doc", "examples", "benchmark", "benchmarks", ".github"],
+            "notName": ["*.md", "*.markdown", "*.rst", "*.txt", "*.xml", "*.xml.dist", "*.yml", "*.yaml", "*.neon", "*.dist", "phpunit*", "CHANGELOG*", "UPGRADE*", "README*", "composer.lock", "Makefile"]
+        }
+    ],
+    "compression": "GZ",
+    "check-requirements": true,
+    "dump-autoload": true,
+    "exclude-composer-files": false,
+    "exclude-dev-files": true,
+    "stub": true,
+    "banner": "Conductor: one application with every module installed, run against a configuration directory (CTAP-1750)."
+}

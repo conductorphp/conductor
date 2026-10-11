@@ -1,0 +1,62 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Conductor\Kernel;
+use ConductorCore\Config\ConfigDirectory;
+
+// The composer bin proxy sets the autoloader path; a direct call from a checkout or a phar falls
+// back to the package's own vendor dir.
+$autoloadPath = $GLOBALS['_composer_autoload_path'] ?? __DIR__ . '/../vendor/autoload.php';
+require $autoloadPath;
+
+// The static binary (static-php "micro" SAPI, CTAP-1782) carries no php.ini, so it starts at PHP's
+// 128M default. A snapshot import or an asset sync needs the 2048M the conductor images allow the
+// CLI (CTAP-1107). memory_limit is PHP_INI_ALL, so the launcher sets it; a vendor or phar install
+// keeps whatever its php.ini says.
+if (PHP_SAPI === 'micro') {
+    ini_set('memory_limit', getenv('CONDUCTOR_MEMORY_LIMIT') ?: '2048M');
+}
+
+// `conductor --version` needs no configuration: answer before resolving one, so an image or a phar can
+// report itself from any directory.
+foreach (array_slice($_SERVER['argv'], 1) as $argument) {
+    if ($argument === '--version' || $argument === '-V') {
+        echo 'Conductor ' . Conductor\Version::current() . PHP_EOL;
+        exit(0);
+    }
+}
+
+try {
+    // The crypt commands need only the key variables, so they run without a configuration directory:
+    // a key can be generated before the rest is set up, and values encrypted under someone else's key
+    // can be re-encrypted even though they stop the config loading (CTAP-2052).
+    $keyOnly = (new \ConductorCore\Console\Crypt\KeyOnlyApplication())->forInput(new \Symfony\Component\Console\Input\ArgvInput());
+    if ($keyOnly !== null) {
+        // Accepted and ignored, so a wrapper that always passes --config still reaches these commands.
+        $keyOnly->getDefinition()->addOption(new \Symfony\Component\Console\Input\InputOption(
+            ConfigDirectory::OPTION,
+            null,
+            \Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED,
+        ));
+        exit($keyOnly->run());
+    }
+
+    $configDirectory = ConfigDirectory::resolve(
+        ConfigDirectory::optionFromArgv($_SERVER['argv']),
+        getenv(ConfigDirectory::ENV_VARIABLE) ?: null,
+        (string) getcwd(),
+    );
+
+    exit(Kernel::createApplication(Kernel::boot($configDirectory))->run());
+} catch (Throwable $e) {
+    // A bootstrap failure must fail the calling script (CTAP-1724): an undefined ${VAR}, a missing
+    // configuration directory, a platform module the configuration needs.
+    $message = "\n\e[1;31mAn Exception Occurred:\n" . $e->getMessage() . "\n" . $e->getTraceAsString() . "\n\n";
+    while ($e = $e->getPrevious()) {
+        $message .= "Previous Exception:\n" . $e->getMessage() . "\n" . $e->getTraceAsString() . "\n\n";
+    }
+    fwrite(STDERR, $message . "\e[1;0m");
+    exit(1);
+}
