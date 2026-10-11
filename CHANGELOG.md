@@ -1,3 +1,10 @@
+[1.0.1](https://github.com/conductorphp/conductor/compare/1.0.0...1.0.1) (2026-10-11)
+
+### Bug Fixes
+* the released majors of aws-s3, azure, mysql and ssh (CTAP-1763) ([0f9dcc8](https://github.com/conductorphp/conductor/commit/0f9dcc80964a7fed5761e95cf7ef0f624312b68c))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
 [1.0.0](https://github.com/conductorphp/conductor/compare/0.0.0...1.0.0) (2026-10-11)
 
 ### Features
