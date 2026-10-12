@@ -1,3 +1,10 @@
+[1.0.3](https://github.com/conductorphp/conductor/compare/1.0.2...1.0.3) (2026-10-12)
+
+### Bug Fixes
+* phar keeps vendor directories named Test or doc (CTAP-2395) ([afc3400](https://github.com/conductorphp/conductor/commit/afc3400b89d8ee9a2cb65eabe2e1cbc49817098c))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
 [1.0.2](https://github.com/conductorphp/conductor/compare/1.0.1...1.0.2) (2026-10-12)
 
 ### Bug Fixes

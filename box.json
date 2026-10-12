@@ -5,9 +5,7 @@
     "files": ["composer.json"],
     "finder": [
         {
-            "in": "vendor",
-            "exclude": ["test", "tests", "Tests", "Test", "docs", "doc", "examples", "benchmark", "benchmarks", ".github"],
-            "notName": ["*.md", "*.markdown", "*.rst", "*.txt", "*.xml", "*.xml.dist", "*.yml", "*.yaml", "*.neon", "*.dist", "phpunit*", "CHANGELOG*", "UPGRADE*", "README*", "composer.lock", "Makefile"]
+            "in": "vendor"
         }
     ],
     "compression": "GZ",
