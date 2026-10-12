@@ -1,3 +1,10 @@
+[1.0.4](https://github.com/conductorphp/conductor/compare/1.0.3...1.0.4) (2026-10-12)
+
+### Bug Fixes
+* release with the modules the phar ships (CTAP-2418) ([6296df5](https://github.com/conductorphp/conductor/commit/6296df516f8975b1ebdc669cada7b21f1af998cf))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
 [1.0.3](https://github.com/conductorphp/conductor/compare/1.0.2...1.0.3) (2026-10-12)
 
 ### Bug Fixes
