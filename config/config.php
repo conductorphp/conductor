@@ -57,13 +57,15 @@ return static function (ConfigDirectory $configDirectory): array {
         new ArrayProvider($environmentConfig->toArray()),
         new ArrayProvider(['conductor' => ['config_directory' => $configDirectory->path]]),
     ], $cachePath, [
-        // Encrypted values (enc:v1:<keyId>:... and the legacy ENC[...]) anywhere in the merged config,
-        // decrypted with the keys above. First, so interpolation sees plaintext.
-        new DecryptConfigPostProcessor($crypt),
         // `${VAR}` placeholders anywhere in the merged config, filled from the process environment and
         // then `application.environment_vars`. An undefined variable fails the load before any plan
         // step runs. Plan step commands are left to the shell.
         new EnvVarInterpolationPostProcessor(),
+        // Encrypted values (enc:v1:<keyId>:... and the legacy ENC[...]) anywhere in the merged config,
+        // decrypted with the keys above. After interpolation, so an encrypted environment variable
+        // reached through `${VAR}` is decrypted exactly like a value written in the YAML, and a
+        // decrypted secret is never scanned for placeholders (CTAP-2383).
+        new DecryptConfigPostProcessor($crypt),
     ]);
 
     return $aggregator->getMergedConfig();

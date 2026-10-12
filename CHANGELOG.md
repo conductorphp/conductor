@@ -1,3 +1,10 @@
+[1.0.2](https://github.com/conductorphp/conductor/compare/1.0.1...1.0.2) (2026-10-12)
+
+### Bug Fixes
+* ${VAR} before decrypting the config (CTAP-2383) ([583bf05](https://github.com/conductorphp/conductor/commit/583bf05808c5c301d714ac362f54095ac8625ec1))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
 [1.0.1](https://github.com/conductorphp/conductor/compare/1.0.0...1.0.1) (2026-10-11)
 
 ### Bug Fixes
