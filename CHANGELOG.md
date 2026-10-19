@@ -1,3 +1,10 @@
+[1.3.1](https://github.com/conductorphp/conductor/compare/1.3.0...1.3.1) (2026-10-19)
+
+### Bug Fixes
+* the config cache holds only the YAML as written and follows edits (CTAP-2759) ([bbc4417](https://github.com/conductorphp/conductor/commit/bbc441785dab8769a3c76b780b1aa210db2734c4))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
 [1.3.0](https://github.com/conductorphp/conductor/compare/1.2.0...1.3.0) (2026-10-19)
 
 ### Features

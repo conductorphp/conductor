@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
+use Conductor\Config\CachedYamlFileProvider;
 use Conductor\Version;
 use ConductorAppOrchestration\Config\EnvVarInterpolationPostProcessor;
 use ConductorCore\Config\ConfigDirectory;
 use ConductorCore\Config\DecryptConfigPostProcessor;
 use ConductorCore\Config\EnvironmentConfig;
 use ConductorCore\Crypt\CryptResolverFactory;
-use ConductorCore\YamlFileProvider;
 use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 
@@ -25,13 +25,12 @@ return static function (ConfigDirectory $configDirectory): array {
     $environment       = $environmentConfig->environment;
     $crypt             = (new CryptResolverFactory())->fromEnvironmentConfig($environmentConfig);
 
-    // Keyed by conductor version and environment so an upgrade never serves a stale cache. Off when
-    // the cache directory is not writable, or with CONDUCTOR_CONFIG_CACHE=0.
-    $cachePath   = $configDirectory->cachePath($environment, Version::current());
-    $cacheConfig = [
-        'config_cache_path'            => $cachePath,
-        ConfigAggregator::ENABLE_CACHE => $cachePath !== null && getenv('CONDUCTOR_CONFIG_CACHE') !== '0',
-    ];
+    // Only the application's YAML is cached, as written, and checked against the files on every load;
+    // interpolation and decryption run every time (CTAP-2759). Keyed by conductor version and
+    // environment. Off when the cache directory is not writable, or with CONDUCTOR_CONFIG_CACHE=0.
+    $cachePath = getenv('CONDUCTOR_CONFIG_CACHE') !== '0'
+        ? $configDirectory->cachePath($environment, Version::current())
+        : null;
 
     $appConfig = $configDirectory->appConfigPath();
 
@@ -50,13 +49,14 @@ return static function (ConfigDirectory $configDirectory): array {
         \ConductorMagento2PlatformSupport\ConfigProvider::class,
         \ConductorSymfony4PlatformSupport\ConfigProvider::class,
         \ConductorWordpressPlatformSupport\ConfigProvider::class,
-        new ArrayProvider($cacheConfig),
         // The application: global files, then the environment's overrides.
-        new YamlFileProvider($appConfig . '/{,*.}yaml'),
-        new YamlFileProvider($appConfig . '/environments/' . $environment . '/{,*.}yaml'),
+        new CachedYamlFileProvider([
+            $appConfig . '/{,*.}yaml',
+            $appConfig . '/environments/' . $environment . '/{,*.}yaml',
+        ], $cachePath),
         new ArrayProvider($environmentConfig->toArray()),
         new ArrayProvider(['conductor' => ['config_directory' => $configDirectory->path]]),
-    ], $cachePath, [
+    ], null, [
         // `${VAR}` placeholders anywhere in the merged config, filled from the process environment and
         // then `application.environment_vars`. An undefined variable fails the load before any plan
         // step runs. Plan step commands are left to the shell.
