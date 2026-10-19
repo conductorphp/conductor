@@ -1,3 +1,12 @@
+[1.3.0](https://github.com/conductorphp/conductor/compare/1.2.0...1.3.0) (2026-10-19)
+
+### Features
+* conductor-application-orchestration: a snapshot restore empties an existing database instead of dropping it (CTAP-2756) ([4a8c907](https://github.com/conductorphp/conductor/commit/4a8c9071f79aad03b8948453a6acfccf76438fa1))
+* conductor-core: DatabaseEmptyingInterface empties a database without dropping it (CTAP-2756) ([90cb0ae](https://github.com/conductorphp/conductor/commit/90cb0ae623e71272300560f104a4448026f714cb))
+* conductor-mysql-database-support: emptyDatabase() drops every table, view, routine and event in place (CTAP-2756) ([5f6d5bd](https://github.com/conductorphp/conductor/commit/5f6d5bdc30f5feade2bcb6400c2ab990f5691310))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
 [1.2.0](https://github.com/conductorphp/conductor/compare/1.1.1...1.2.0) (2026-10-19)
 
 ### Features
