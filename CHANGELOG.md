@@ -1,3 +1,10 @@
+[1.3.3](https://github.com/conductorphp/conductor/compare/1.3.2...1.3.3) (2026-10-20)
+
+### Bug Fixes
+* conductor-core: every defuse key in CONDUCTOR_CRYPT_KEYS_PREVIOUS decrypts (CTAP-2786) ([bae399c](https://github.com/conductorphp/conductor/commit/bae399ceeae3bebbe7ecc6d15eeccc59d74c16d5))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
 [1.3.2](https://github.com/conductorphp/conductor/compare/1.3.1...1.3.2) (2026-10-20)
 
 ### Bug Fixes
