@@ -1,3 +1,10 @@
+[1.3.4](https://github.com/conductorphp/conductor/compare/1.3.3...1.3.4) (2026-10-22)
+
+### Bug Fixes
+* conductor-magento-2-platform-support: env.php renders no SET NAMES utf8 init statement (CTAP-2851) ([e1b110f](https://github.com/conductorphp/conductor/commit/e1b110f54db2bde688cd3d64b0e8d7cca24d37b7))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
 [1.3.3](https://github.com/conductorphp/conductor/compare/1.3.2...1.3.3) (2026-10-20)
 
 ### Bug Fixes

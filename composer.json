@@ -1,6 +1,6 @@
 {
   "name": "conductor/conductor",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Conductor: the deploy and orchestration application, with every conductor module installed, run against an application's configuration directory.",
   "type": "library",
   "homepage": "https://github.com/conductorphp/conductor",
