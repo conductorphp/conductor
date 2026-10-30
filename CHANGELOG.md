@@ -1,3 +1,12 @@
+[1.3.5](https://github.com/conductorphp/conductor/compare/1.3.4...1.3.5) (2026-10-30)
+
+### Bug Fixes
+* conductor-clicktap-platform-support: nature groups cover every clicktap module table the data-class audit reported (CTAP-3037) ([025dd15](https://github.com/conductorphp/conductor/commit/025dd15bcb0f484298e1b1673832cd665592efc4))
+* conductor-clicktap-platform-support: @personal_data excludes the permission snapshots and preferred payment methods (CTAP-3037) ([f091055](https://github.com/conductorphp/conductor/commit/f091055921bdcf055bb4b70562fd2ea826439d9f))
+* conductor-magento-2-platform-support: nature groups exclude Signifyd, Amazon Pay, AvaTax and core tables that carry PII (CTAP-3037) ([11c264c](https://github.com/conductorphp/conductor/commit/11c264ca7502f732a67c6c5b06c8059fa162192e))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
 [1.3.4](https://github.com/conductorphp/conductor/compare/1.3.3...1.3.4) (2026-10-22)
 
 ### Bug Fixes
