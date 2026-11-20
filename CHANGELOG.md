@@ -1,3 +1,18 @@
+[1.3.7](https://github.com/conductorphp/conductor/compare/1.3.6...1.3.7) (2026-11-20)
+
+### Bug Fixes
+* trigger release (CTAP-3079) ([9897074](https://github.com/conductorphp/conductor/commit/9897074cb47070d593a753e4372feeb4a9d9ea3e))
+* conductor-magento-2-platform-support: trigger release (CTAP-3079) ([a67ff20](https://github.com/conductorphp/conductor/commit/a67ff20672481b017258c21298b20c42e59ffeac))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
+[1.3.6](https://github.com/conductorphp/conductor/compare/1.3.5...1.3.6) (2026-11-19)
+
+### Bug Fixes
+* conductor-magento-2-platform-support: render a Redis cache backend Magento 2.4.9 accepts (CTAP-3079) ([358efa6](https://github.com/conductorphp/conductor/commit/358efa6ff79485a6fc6e5fc9a9742b00f3ba7b3c))
+
+<!--- CHANGELOG SPLIT MARKER -->
+
 [1.3.5](https://github.com/conductorphp/conductor/compare/1.3.4...1.3.5) (2026-10-30)
 
 ### Bug Fixes
